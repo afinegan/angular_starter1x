@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+	<base href="/">
+	<title>Angular 1.x Starter App</title>
+	<% if (useMin) {%>
+	<link href="<%= grunt.template.path.basename(process(cssmin.app.dest)) %>" rel="stylesheet"/>
+	<% } else { %>
+	<link href="<%= grunt.template.path.basename(process(cssmin.app.dest)) %>" rel="stylesheet"/>
+	<link href="<%= grunt.template.path.basename(less.app.dest) %>" rel="stylesheet"/>
+	<% } %>
+</head>
+<body common-css data-ng-app="angular_starter1x" data-ng-controller="starterController as app" data-mg-strict-di>
+	<div class="alert-box repeat-item" ng-repeat="alert in alertService.alerts" >
+		<div uib-alert  ng-class="'alert-' + (alert.type || 'warning')" close="alertService.closeAlert($index)" dismiss-on-timeout="1500">{{alert.msg}}</div>
+	</div>
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><strong class="panel-title"></strong></a>
+		</div>
+		<div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+			<div class="row">
+				<div class="col-xs-4">
+					<ul class="nav navbar-nav">
+						<li><a href="#">Home</a></li>
+					</ul>
+				</div>
+			</div>
+		</div><!-- /.navbar-collapse -->
+	</nav>
+	<div ui-view></div>
+	<script src="<%= grunt.template.path.basename(concat.vendor.dest) %>"></script>
+	<script src="<%= grunt.template.path.basename(concat.app.dest) %>"></script>
+</body>
+</html>
